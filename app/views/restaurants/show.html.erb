@@ -1,0 +1,19 @@
+<h1><%= @restaurant.name %></h1>
+<h2>Address :</h2>
+<p><%= @restaurant.address %>
+<h2>Type of food :</h2>
+<p><%= @restaurant.category %>
+<h2>Reviews :</h2>
+<% @restaurant.reviews.each do |review| %>
+  <div class="d-flex">
+    <%= review.content %>
+    <div> Rating : <%= review.rating %>/5 </div>
+  </div>
+<% end %>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating, as: :select, collection: [1, 2, 3, 4, 5] %>
+  <%= f.submit %>
+<% end %>
+<div><%= link_to "<- Back", restaurants_path %> </div>
